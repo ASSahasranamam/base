@@ -62,9 +62,9 @@
 
   <div class="row">
     <div class=" col-sm-3">item</br>
-      <ul  class="item" id="item{{ item }}" ng-model="list" ng-repeat="item in items" draggable item="item">
+      <ul  class="item" id="item{{ item }}o{{order}}" ng-model="item$indexo$order" ng-repeat="item in items" draggable item="item">
 
-    <li><span> Value:  <input id="sample" type="{{ item }}" /> </span></li>
+    <li><span> Value:  <input id="vitem{{ item }}o{{order}}" type="{{ item }}" ng-model="item$indexo$order" /> </span></li>
     </ul>
       </div>
 
@@ -78,7 +78,8 @@
 
 
 </body>
-<script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js'></script>
+<script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
+
 
 <script>
 var app = angular.module('dragDrop', []);
@@ -182,9 +183,19 @@ app.directive('droppable', function() {
 
 app.controller('DragDropCtrl', function($scope) {
   $scope.items=['text','checkbox','button'];
+  $scope.order=0;
+  $scope.formArray=[];
+  $scope.temp;
+
   $scope.handleDrop = function(item, bin) {
     alert('Item ' + item + ' has been dropped into ' + bin);
+    $scope.order++;
+    console.log($scope.order);
+    $scope.temp={"ngmod":item, "pos":$scope.order};
+    $scope.formArray.push($scope.temp);
+    console.log($scope.formArray);
   };
+
 
 });
 //# sourceURL=pen.js
